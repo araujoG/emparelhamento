@@ -3,12 +3,9 @@ from aresta import Aresta;
 from vertice import Vertice;
 
 class Grafo:
-  def __init__(self) -> None:
+  def __init__(self, entrada) -> None:
     self.vertices = []
-    self.entrada = [[1,1,0,0],
-                    [0,1,1,0],
-                    [0,1,1,0],
-                    [0,0,0,0]]
+    self.entrada = entrada
     self.cardinalidadeX = len(self.entrada)
     self.cardinalidadeY = len(self.entrada[0])
     self.emparelhamento = []
@@ -64,6 +61,7 @@ class Grafo:
     return []
 
   def emparelha(self):
+    print("\nEmparelhamento inicial: ", self.emparelhamento)
     if self.ehEmparelhamentoPerfeito():
       return self.emparelhamento
     while(True):
@@ -74,9 +72,9 @@ class Grafo:
       caminho = self.caminhoAumentante(u)
       if(caminho == []):
           break 
+      print("Caminho aumentante: ", caminho)
       self.difSimetrica(caminho)
-      
-    pass
+      print("Novo Emparelhamento: ", self.emparelhamento)
 
   def ehEmparelhamentoPerfeito(self):
     if len(self.emparelhamento) == self.cardinalidadeX or len(self.emparelhamento) == self.cardinalidadeY:
